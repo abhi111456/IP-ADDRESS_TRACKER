@@ -1,4 +1,6 @@
-
+import { MapContainer, TileLayer, useMap,Marker,Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import icon from './icon'
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg.png";
 function App() {
@@ -9,7 +11,7 @@ function App() {
           <img
             src={background}
             alt="background"
-            className="w-full h-full object-cover"
+            className="w-full h-100 object-cover"
           />
         </div>
         <article className="p-8 relative z-10">
@@ -32,7 +34,7 @@ function App() {
             </button>
           </form>
         </article>
-        <article className="bg-white rounded-lg shadow p-8 mx-8 max-w-6xl grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:mx-auto">
+        <article className="bg-white rounded-lg shadow p-8 mx-8 max-w-6xl grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 xl:mx-auto text-center md:text-left lg:-mb-10 relative" style={{zIndex:10000}}>
           <div className="lg:border-r lg:border-slate-400">
             <h2 className="text-sm uppercase text-slate-600 mb-3">
               IP Address
@@ -60,6 +62,22 @@ function App() {
             </p>
           </div>
         </article>
+        <MapContainer
+          center={[51.505, -0.09]}
+          zoom={13}
+          style={{height:"600px",width:"100vw"}}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker icon={icon} position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
       </section>
     </>
   );
