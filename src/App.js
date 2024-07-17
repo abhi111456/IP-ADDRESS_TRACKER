@@ -1,4 +1,4 @@
-//https://geo.ipify.org/api/v2/country,city?apiKey=at_8GYPmhNj8uzngo5SAxUY09DfSI995&ipAddress=8.8.8.8
+
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg.png";
 function App() {
