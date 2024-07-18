@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import arrow from "./images/icon-arrow.svg";
 import background from "./images/pattern-bg.png";
-import { map } from "leaflet";
+
 function App() {
 
   const [Address, setAddress] = useState(null);
