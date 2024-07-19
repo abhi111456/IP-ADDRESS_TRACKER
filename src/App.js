@@ -106,7 +106,7 @@ const checkDomain =
           <div className="lg:border-r lg:border-slate-400">
             <h2 className="text-sm uppercase text-slate-600 mb-3">TimeZone</h2>
             <p className="font-semibold text-slate-900 md:text-xl xl:text-2xl">
-              Utc {Address.location.timezone}
+              UTC {Address.location.timezone}
             </p>
           </div>
           <div>
@@ -119,7 +119,7 @@ const checkDomain =
         <MapContainer
           center={[Address.location.lat, Address.location.lng]}
           zoom={13}
-          style={{height:"700px",width:"100vw"}}
+          style={{height:"700px",width:"100%"}}
           scrollWheelZoom={true}
         >
           <TileLayer
