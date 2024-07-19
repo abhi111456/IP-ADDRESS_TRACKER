@@ -51,82 +51,85 @@ function App() {
   };
   return (
     <>
-      <section className="relative w-full h-screen">
-        <div className="absolute top-0 left-0 w-full h-90 -z-10">
+      <section>
+        <div className="absolute w-full -z-10 md:m-0">
           <img
             src={background}
             alt="background"
-            className="w-full h-100 object-cover"
+            className="w-full h-80"
           />
         </div>
-        <article className="p-8 relative z-10">
-          <h1 className="text-2xl text-center lg:text-3xl text-white font-bold mb-8">
+        <div className="max-w-xl mx-auto p-8">
+        <h1 className="font-bold text-2xl lg:text-3xl text-white pb-8 text-center">
             IP Address Tracker
           </h1>
           <form
             onSubmit={handleSubmit}
             autoComplete="off"
-            className="flex justify-center max-w-xl mx-auto"
+            className="w-full flex"
           >
             <input
               type="text"
               name="ipaddress"
               id="ipaddress"
               placeholder="Search for any IP address or domain"
-              className="py-1 px-4 rounded-l-lg w-full focus:outline-none"
+              className="w-full py-2 px-4 rounded-l-lg focus:outline-none"
               value={ipaddress}
               onChange={(e) => setIpAddress(e.target.value)}
             />
             <button
               type="submit"
-              className="bg-black py-2 px-2 hover:opacity-80 rounded-r-lg text-white"
+              className="bg-black py-2 px-4 rounded-r-lg text-white"
             >
               My IP Address
             </button>
           </form>
-        </article>
+        </div>
 
         {Address && (
           <>
-            <article
-              className="bg-white rounded-lg shadow p-8 mx-8 max-w-6xl grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 xl:mx-auto text-center md:text-left lg:-mb-12 relative"
-              style={{ zIndex: 10000 }}
-            >
-              <div className="lg:border-r lg:border-slate-400">
-                <h2 className="text-sm uppercase text-slate-600 mb-3">
-                  IP Address
-                </h2>
-                <p className="font-semibold text-slate-900 md:text-xl xl:text-2xl">
-                  {Address.ip}
-                </p>
-              </div>
-              <div className="lg:border-r lg:border-slate-400">
-                <h2 className="text-sm uppercase text-slate-600 mb-3">
-                  Location
-                </h2>
-                <p className="font-semibold text-slate-900 md:text-xl xl:text-2xl">
-                  {Address.location.city} ,{Address.location.region}
-                </p>
-              </div>
-              <div className="lg:border-r lg:border-slate-400">
-                <h2 className="text-sm uppercase text-slate-600 mb-3">
-                  TimeZone
-                </h2>
-                <p className="font-semibold text-slate-900 md:text-xl xl:text-2xl">
-                  UTC {Address.location.timezone}
-                </p>
-              </div>
-              <div>
-                <h2 className="text-sm uppercase text-slate-600 mb-3">ISP</h2>
-                <p className="font-semibold text-slate-900 md:text-xl xl:text-2xl">
-                  {Address.isp ? Address.isp : "Not Found"}
-                </p>
+          <article className="p-8">
+              <div
+                className="bg-white rounded-xl p-8 shadow max-w-6xl mx-auto grid grid-cols-1 gap-5 text-center md:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:text-left -mb-12 relative lg:-mb-32 "
+                style={{
+                  zIndex: 10000,
+                }}
+              >
+                <article className="lg:border-r lg:border-slate-400 p-6">
+                  <h2 className="text-sm uppercase text-slate-600">
+                    IP Address
+                  </h2>
+                  <p className="font-bold text-slate-900 text-2xl">
+                    {Address.ip}
+                  </p>
+                </article>
+
+                <article className="lg:border-r lg:border-slate-400 p-6">
+                  <h2 className="text-sm uppercase text-slate-600">Location</h2>
+                  <p className="font-bold text-slate-900 text-2xl">
+                    {Address.location.city}, {Address.location.region}
+                  </p>
+                </article>
+
+                <article className="lg:border-r lg:border-slate-400 p-6">
+                  <h2 className="text-sm uppercase text-slate-600">Timezone</h2>
+                  <p className="font-bold text-slate-900 text-2xl">
+                    UTC {Address.location.timezone}
+                  </p>
+                </article>
+
+                <article className="p-6">
+                  <h2 className="text-sm uppercase text-slate-600">ISP</h2>
+                  <p className="font-bold text-slate-900 text-2xl">
+                  {Address.isp ? Address.isp : 'Not Found'}
+                  </p>
+                </article>
               </div>
             </article>
             <MapContainer
               center={[Address.location.lat, Address.location.lng]}
               zoom={13}
-              style={{ height: "700px", width: "100%" }}
+              style={{ height: "100vh", width: "100%" }}
               scrollWheelZoom={true}
             >
               <TileLayer
