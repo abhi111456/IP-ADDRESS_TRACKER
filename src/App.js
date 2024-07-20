@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import background from "./images/pattern-bg.png";
 
+
 function App() {
   const [Address, setAddress] = useState(null);
   const [ipaddress, setIpAddress] = useState("");
@@ -32,7 +33,7 @@ function App() {
     const res = await fetch(
       `https://geo.ipify.org/api/v2/country,city?apiKey=${
         process.env.REACT_APP_API_KEY
-      }&${process.env.REACT_APP_API_KEY}&${
+      }&${
         checkIpAddress.test(ipaddress)
           ? `ipAddress=${ipaddress}`
           : checkDomain.test(ipaddress)
@@ -49,48 +50,49 @@ function App() {
     getEnteredAddress();
     setIpAddress("");
   };
+
   return (
     <>
-      <section>
-        <div className="absolute w-full -z-10 md:m-0">
-          <img
-            src={background}
-            alt="background"
-            className="w-full h-80"
-          />
-        </div>
-        <div className="max-w-xl mx-auto p-8">
-        <h1 className="font-bold text-2xl lg:text-3xl text-white pb-8 text-center">
-            IP Address Tracker
-          </h1>
-          <form
-            onSubmit={handleSubmit}
-            autoComplete="off"
-            className="w-full flex"
-          >
-            <input
-              type="text"
-              name="ipaddress"
-              id="ipaddress"
-              placeholder="Search for any IP address or domain"
-              className="w-full py-2 px-4 rounded-l-lg focus:outline-none"
-              value={ipaddress}
-              onChange={(e) => setIpAddress(e.target.value)}
+      <section className="relative">
+          <div className="absolute w-full -z-10">
+            <img
+              src={background}
+              alt="background"
+              className="w-full h-80 object-cover"
             />
-            <button
-              type="submit"
-              className="bg-black py-2 px-4 rounded-r-lg text-white"
+          </div>
+          <div className="max-w-xl mx-auto p-8">
+            <h1 className="font-bold text-2xl lg:text-3xl text-white pb-8 text-center">
+              IP Address Tracker
+            </h1>
+            <form
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              className="w-full flex"
             >
-              My IP Address
-            </button>
-          </form>
-        </div>
+              <input
+                type="text"
+                name="ipaddress"
+                id="ipaddress"
+                placeholder="Search for any IP address or domain"
+                className="w-full py-2 px-4 rounded-l-lg focus:outline-none"
+                value={ipaddress}
+                onChange={(e) => setIpAddress(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="bg-black py-2 px-4 rounded-r-lg text-white"
+              >
+                My IP Address
+              </button>
+            </form>
+          </div>
 
         {Address && (
           <>
-          <article className="p-8">
+            <article className="p-8">
               <div
-                className="bg-white rounded-xl p-8 shadow max-w-6xl mx-auto grid grid-cols-1 gap-5 text-center md:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:text-left -mb-12 relative lg:-mb-32 "
+                className="bg-white rounded-xl p-8 shadow max-w-6xl mx-auto grid grid-cols-1 gap-5 text-center md:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:text-left -mb-12 relative lg:-mb-32"
                 style={{
                   zIndex: 10000,
                 }}
@@ -121,7 +123,7 @@ function App() {
                 <article className="p-6">
                   <h2 className="text-sm uppercase text-slate-600">ISP</h2>
                   <p className="font-bold text-slate-900 text-2xl">
-                  {Address.isp ? Address.isp : 'Not Found'}
+                    {Address.isp ? Address.isp : "Not Found"}
                   </p>
                 </article>
               </div>
@@ -129,7 +131,8 @@ function App() {
             <MapContainer
               center={[Address.location.lat, Address.location.lng]}
               zoom={13}
-              style={{ height: "100vh", width: "100%" }}
+              className="md:mb-0"
+              style={{ height: "100vh", width: "100%",marginTop:'-10px'}}
               scrollWheelZoom={true}
             >
               <TileLayer
